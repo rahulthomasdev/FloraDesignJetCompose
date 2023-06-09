@@ -106,7 +106,7 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(IntrinsicSize.Min)
-                    .weight(0.1f)
+                    .weight(0.08f)
                     .background(color = colorResource(id = R.color.floral_green)),
                 contentAlignment = Alignment.Center
             ) {
@@ -165,7 +165,7 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                                         .build(),
                                     contentDescription = null,
                                     contentScale = ContentScale.Crop,
-                                    modifier = Modifier.height(200.dp)
+                                    modifier = Modifier.height(170.dp)
                                 )
                             }
                         )
@@ -370,7 +370,7 @@ fun BottomNav(){
         .fillMaxWidth()
         .fillMaxHeight()
         .padding(16.dp)
-        .padding(top = 12.dp)
+        .padding(top = 3.dp)
         .background(color = colorResource(id = R.color.bg_white)),shape= RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp), colors = CardDefaults.cardColors(Color.White)
     ) {

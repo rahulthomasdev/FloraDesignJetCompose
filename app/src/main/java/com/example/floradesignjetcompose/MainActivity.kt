@@ -137,7 +137,7 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(0.9f)
-                    .clip(shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp))
+                    .clip(shape = RoundedCornerShape(topStart = 45.dp, topEnd = 45.dp))
                     .background(color = colorResource(id = R.color.bg_white)),
                 contentAlignment = Alignment.TopCenter
             ) {
@@ -151,10 +151,10 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                     Card(
                         modifier = Modifier
                             .padding(16.dp)
-                            .padding(top = 16.dp)
+                            .padding(top = 10.dp)
                             .fillMaxWidth()
                             .fillMaxHeight(0.25f),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(30.dp),
                     ) {
                         AutoSlidingCarousel(
                             itemsCount = images.size,
@@ -170,11 +170,12 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                             }
                         )
                     }
+                    Spacer(modifier = Modifier.padding(vertical = 10.dp))
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight()
-                            .background(Color.White)
+                            .background(color = colorResource(id = R.color.bg_white))
                             .clip(shape = RoundedCornerShape(16.dp)),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceEvenly
@@ -189,7 +190,7 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                         .padding(top = 18.dp)
                         .fillMaxWidth(0.9f)
                         .wrapContentHeight()
-                        .background(Color.White),
+                        .background(color = colorResource(id = R.color.bg_white)),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ){
                         Text(text = "Popular Items",
@@ -335,7 +336,7 @@ fun ProductList(products: List<Product>){
                             .fillMaxWidth(0.5f)
                             .wrapContentHeight()) {
                             Text(text = product.Title, fontSize = 20.sp, fontWeight = FontWeight.W600, color = Color.Black, modifier = Modifier.padding(top = 8.dp, start = 8.dp, bottom = 4.dp))
-                            Text(text = product.Price, fontSize = 18.sp, fontWeight = FontWeight.W500,color= colorResource(id = R.color.floral_green), modifier = Modifier.padding(top = 8.dp, start = 8.dp, bottom = 4.dp))
+                            Text(text = product.Price, fontSize = 18.sp, fontWeight = FontWeight.W500,color= colorResource(id = R.color.floral_green), modifier = Modifier.padding(top = 4.dp, start = 8.dp, bottom = 4.dp))
                         }
                         Column(modifier = Modifier
                             .fillMaxWidth()
@@ -369,8 +370,8 @@ fun BottomNav(){
         .fillMaxWidth()
         .fillMaxHeight()
         .padding(16.dp)
-        .padding(top = 15.dp)
-        .background(color = Color.White,),shape= RoundedCornerShape(20.dp),
+        .padding(top = 12.dp)
+        .background(color = colorResource(id = R.color.bg_white)),shape= RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp), colors = CardDefaults.cardColors(Color.White)
     ) {
         Row(modifier = Modifier

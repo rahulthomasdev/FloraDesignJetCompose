@@ -19,6 +19,7 @@
             android:exported="false"
             android:label="@string/title_activity_login_page"
             android:theme="@style/Theme.FloraDesignJetCompose" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

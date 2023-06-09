@@ -8,6 +8,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Arrangement.Center
 import androidx.compose.foundation.layout.Arrangement.End
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.Box
@@ -44,6 +45,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomCenter
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -135,7 +138,7 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                     .fillMaxWidth()
                     .weight(0.9f)
                     .clip(shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp))
-                    .background(color = Color.White),
+                    .background(color = colorResource(id = R.color.bg_white)),
                 contentAlignment = Alignment.TopCenter
             ) {
                 Column(modifier = Modifier
@@ -169,13 +172,12 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                     }
                     Row(
                         modifier = Modifier
-                            .padding(16.dp)
                             .fillMaxWidth()
-                            .fillMaxHeight(0.15f)
+                            .wrapContentHeight()
                             .background(Color.White)
                             .clip(shape = RoundedCornerShape(16.dp)),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         RowButton(icon = R.drawable.flower)
                         RowButton(icon = R.drawable.bouquet)
@@ -184,19 +186,19 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                     }
 
                     Row(modifier = Modifier
-                        .padding(16.dp)
+                        .padding(top = 18.dp)
                         .fillMaxWidth(0.9f)
                         .wrapContentHeight()
                         .background(Color.White),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ){
                         Text(text = "Popular Items",
-                            fontSize = 25.sp,
-                            fontWeight = FontWeight.Bold,
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.W700,
                             color = Color.Black
                         )
                         Text(text = "View All",
-                            fontSize = 20.sp,
+                            fontSize = 18.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = colorResource(id = R.color.floral_green)
                         )
@@ -229,8 +231,8 @@ fun DotsIndicator(
     modifier: Modifier = Modifier,
     totalDots: Int,
     selectedIndex: Int,
-    selectedColor: Color = colorResource(id = R.color.floral_green) /* Color.Yellow */,
-    unSelectedColor: Color = Color.Gray /* Color.Gray */,
+    selectedColor: Color = Color.Gray /* Color.Yellow */,
+    unSelectedColor: Color = colorResource(id = R.color.gray_100) /* Color.Gray */,
     dotSize: Dp
 ) {
     LazyRow(
@@ -245,7 +247,7 @@ fun DotsIndicator(
             )
 
             if (index != totalDots - 1) {
-                Spacer(modifier = Modifier.padding(horizontal = 2.dp))
+                Spacer(modifier = Modifier.padding(horizontal = 4.dp))
             }
         }
     }
@@ -266,35 +268,36 @@ fun AutoSlidingCarousel(
         delay(autoSlideDuration)
         pagerState.animateScrollToPage((pagerState.currentPage + 1) % itemsCount)
     }
-
     Box(
         modifier = modifier.fillMaxWidth(),
     ) {
         HorizontalPager(count = itemsCount, state = pagerState) { page ->
             itemContent(page)
-        }
-        Surface(
-            modifier = Modifier
-                .padding(bottom = 16.dp)
-                .align(Alignment.BottomCenter),
-            shape = CircleShape,
-            color = Color.Black.copy(alpha = 0.5f)
-        ) {
-            DotsIndicator(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
-                totalDots = itemsCount,
-                selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
-                dotSize = 16.dp
-            )
+            Surface(
+                modifier = Modifier
+                    .padding(bottom = 16.dp)
+                    .align(BottomCenter),
+                shape = CircleShape,
+                color = Color.Black.copy(alpha = 0f)
+            ) {
+                DotsIndicator(
+                    modifier = Modifier.padding(horizontal = 15.dp, vertical =5.dp),
+                    totalDots = itemsCount,
+                    selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
+                    dotSize = 6.dp
+                )
+            }
         }
     }
+
 }
 
 @Composable
 fun RowButton(icon: Int, color: Color = Color.White){
     Card(modifier = Modifier
-        .size(64.dp)
-        .background(color, shape = RoundedCornerShape(16.dp)), elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)){
+        .padding(5.dp)
+        .size(75.dp)
+        .background(color, shape = RoundedCornerShape(20.dp)), elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)){
         val imagePainter = rememberAsyncImagePainter(icon)
         Image(
             painter = imagePainter,
@@ -312,8 +315,8 @@ fun ProductList(products: List<Product>){
     ){
         items(products){product ->
             Card(modifier = Modifier
-                .padding(8.dp)
-                .width(200.dp)
+                .width(182.dp)
+                .padding(end = 18.dp, top = 14.dp)
                 .fillMaxHeight(0.7f), elevation = CardDefaults.cardElevation(4.dp),
                 shape = MaterialTheme.shapes.medium, colors = CardDefaults.cardColors(Color.White)) {
                 Column(modifier = Modifier
@@ -322,7 +325,7 @@ fun ProductList(products: List<Product>){
                         contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.7f),
+                        .fillMaxHeight(0.65f),
                         contentScale = ContentScale.FillBounds
                         )
                     Row(modifier = Modifier
@@ -331,24 +334,23 @@ fun ProductList(products: List<Product>){
                         Column(modifier = Modifier
                             .fillMaxWidth(0.5f)
                             .wrapContentHeight()) {
-                            Text(text = product.Title, fontSize = 20.sp, color = Color.Black, modifier = Modifier.padding(top = 8.dp, start = 4.dp))
-                            Text(text = product.Price, fontSize = 18.sp, color= Color.Gray, modifier = Modifier.padding(top = 8.dp, start = 4.dp))
+                            Text(text = product.Title, fontSize = 20.sp, fontWeight = FontWeight.W600, color = Color.Black, modifier = Modifier.padding(top = 8.dp, start = 8.dp, bottom = 4.dp))
+                            Text(text = product.Price, fontSize = 18.sp, fontWeight = FontWeight.W500,color= colorResource(id = R.color.floral_green), modifier = Modifier.padding(top = 8.dp, start = 8.dp, bottom = 4.dp))
                         }
                         Column(modifier = Modifier
                             .fillMaxWidth()
-                            .fillMaxHeight()) {
-                            Button(onClick = { /*TODO*/ },shape = RoundedCornerShape(8.dp), modifier = Modifier
-                                .padding(8.dp)
+                            .fillMaxHeight()
+                            .padding(bottom = 22.dp, top = 10.dp, end = 10.dp,)) {
+                            Button(onClick = { /*TODO*/ },shape = RoundedCornerShape(14.dp), modifier = Modifier
                                 .wrapContentWidth()
                                 .fillMaxHeight()
                                 .align(Alignment.End),
+                                contentPadding = PaddingValues(0.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = colorResource(id = R.color.floral_green),
                                     contentColor = colorResource(id = R.color.white)
                                 )) {
-                                Text(text = "+",
-                                    color = Color.White,
-                                    fontSize = 20.sp)
+                                Icon(painter = painterResource(id = R.drawable.baseline_add_24) , modifier = Modifier.fillMaxSize(0.5f), contentDescription = null)
                             }
                         }
                         
@@ -365,26 +367,31 @@ fun ProductList(products: List<Product>){
 fun BottomNav(){
     Card(modifier = Modifier
         .fillMaxWidth()
-        .fillMaxHeight(0.9f)
+        .fillMaxHeight()
         .padding(16.dp)
-        .background(color = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp), colors = CardDefaults.cardColors(Color.White)
+        .padding(top = 15.dp)
+        .background(color = Color.White,),shape= RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp), colors = CardDefaults.cardColors(Color.White)
     ) {
         Row(modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .padding(start = 24.dp, end = 24.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
         Icon(painter = painterResource(id = R.drawable.baseline_settings_24), contentDescription = null , modifier = Modifier.size(30.dp), tint = colorResource(
             id = R.color.floral_green
         ))
-        Icon(painter = painterResource(id = R.drawable.baseline_location_on_24), contentDescription = null, modifier = Modifier.size(30.dp), tint = Color.Gray
+        Icon(painter = painterResource(id = R.drawable.baseline_location_on_24), contentDescription = null, modifier = Modifier.size(30.dp), tint = colorResource(
+            id = R.color.gray_300
         )
-        Icon(painter = painterResource(id = R.drawable.baseline_shopping_bag_24), contentDescription = null, modifier = Modifier.size(30.dp), tint = Color.Gray
         )
-        Icon(painter = painterResource(id = R.drawable.baseline_person_24), contentDescription = null, modifier = Modifier.size(30.dp), tint = Color.Gray
+        Icon(painter = painterResource(id = R.drawable.baseline_shopping_bag_24), contentDescription = null, modifier = Modifier.size(30.dp), tint = colorResource(
+            id = R.color.gray_300)
+        )
+        Icon(painter = painterResource(id = R.drawable.baseline_person_24), contentDescription = null, modifier = Modifier.size(30.dp), tint = colorResource(
+            id = R.color.gray_300)
         )
         }
     }

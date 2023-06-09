@@ -1,8 +1,6 @@
 package com.example.floradesignjetcompose
 
-import android.graphics.Paint
 import android.os.Bundle
-import android.text.Layout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -49,7 +47,7 @@ class LoginPage : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+            LoginScreen()
         }
     }
 }
@@ -89,7 +87,7 @@ fun LoginScreen() {
                     .fillMaxSize()
                     .background(
                         color = Color.White,
-                        shape = RoundedCornerShape(40.dp, 40.dp, 0.dp, 0.dp)
+                        shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp, bottomStart = 0.dp, bottomEnd = 0.dp)
                     ),
                     contentAlignment = Alignment.TopCenter
                 ){

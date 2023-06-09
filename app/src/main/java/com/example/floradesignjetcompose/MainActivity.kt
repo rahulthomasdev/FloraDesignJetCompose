@@ -113,7 +113,7 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                 ) {
                     // Brand name
                     Text(
-                        text = "Your Brand",
+                        text = "BRAND NAME",
                         modifier = Modifier.weight(1f),
                         fontSize = 30.sp,
                         color = Color.White,
@@ -147,9 +147,9 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                     // Content inside the box section
                     Card(
                         modifier = Modifier
-                            .padding(8.dp)
+                            .padding(16.dp)
                             .padding(top = 16.dp)
-                            .fillMaxWidth(0.95f)
+                            .fillMaxWidth()
                             .fillMaxHeight(0.25f),
                         shape = RoundedCornerShape(16.dp),
                     ) {
@@ -169,8 +169,8 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                     }
                     Row(
                         modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth(0.9f)
+                            .padding(16.dp)
+                            .fillMaxWidth()
                             .fillMaxHeight(0.15f)
                             .background(Color.White)
                             .clip(shape = RoundedCornerShape(16.dp)),
@@ -184,7 +184,7 @@ fun MyScreen(images: List<String>, products: List<Product>) {
                     }
 
                     Row(modifier = Modifier
-                        .padding(8.dp)
+                        .padding(16.dp)
                         .fillMaxWidth(0.9f)
                         .wrapContentHeight()
                         .background(Color.White),
@@ -275,16 +275,16 @@ fun AutoSlidingCarousel(
         }
         Surface(
             modifier = Modifier
-                .padding(bottom = 8.dp)
+                .padding(bottom = 16.dp)
                 .align(Alignment.BottomCenter),
             shape = CircleShape,
             color = Color.Black.copy(alpha = 0.5f)
         ) {
             DotsIndicator(
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
                 totalDots = itemsCount,
                 selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
-                dotSize = 8.dp
+                dotSize = 16.dp
             )
         }
     }
@@ -308,7 +308,7 @@ fun RowButton(icon: Int, color: Color = Color.White){
 @Composable
 fun ProductList(products: List<Product>){
     LazyRow(modifier = Modifier.padding(vertical = 8.dp),
-        contentPadding = PaddingValues(horizontal = 8.dp)
+        contentPadding = PaddingValues(horizontal = 16.dp)
     ){
         items(products){product ->
             Card(modifier = Modifier
@@ -366,7 +366,7 @@ fun BottomNav(){
     Card(modifier = Modifier
         .fillMaxWidth()
         .fillMaxHeight(0.9f)
-        .padding(8.dp)
+        .padding(16.dp)
         .background(color = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp), colors = CardDefaults.cardColors(Color.White)
     ) {
